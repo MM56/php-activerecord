@@ -337,6 +337,10 @@ class Table
 		return null;
 	}
 
+	public function get_relationships() {
+		return $this->relationships;
+	}
+
 	/**
 	 * Does a given relationship exist?
 	 *
