@@ -1293,7 +1293,7 @@ class Model
 		$this->remove_from_cache();
 
 		$this->__relationships = array();
-		$pk = array_values($this->get_values_for($this->get_primary_key()));
+		$pk = array_values($this->get_values_for(array($this->get_primary_key(true))));
 
 		$this->set_attributes_via_mass_assignment($this->find($pk)->attributes, false);
 		$this->reset_dirty();
