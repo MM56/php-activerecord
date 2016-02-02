@@ -872,6 +872,9 @@ class Model
 			if (empty($pk))
 				throw new ActiveRecordException("Cannot update, no primary key defined for: " . get_called_class());
 
+			if (!$this->invoke_callback('before_update',false))
+				return false;
+
 			$dirty = $this->dirty_attributes();
 
 			$keysToRemove = array();
@@ -883,9 +886,6 @@ class Model
 			foreach ($keysToRemove as $keyToRemove) {
 				unset($pk[$keyToRemove]);
 			}
-
-			if (!$this->invoke_callback('before_update',false))
-				return false;
 
 			static::table()->update($dirty,$pk);
 			$this->invoke_callback('after_update',false);
